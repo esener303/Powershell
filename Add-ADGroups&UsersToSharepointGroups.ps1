@@ -17,12 +17,11 @@ Import-Module activedirectory -ErrorAction SilentlyContinue
 
 # CSV file paramters schema example 
 
-# SiteUrl,ADGroup,SPGroup
-# "https://pl-poc","CN=WL-PL-MM-TAX-Assist-Central Cluster,OU=Tax,OU=DigitalMailroom,OU=Sharepoint,OU=Groups,OU=PL,DC=cee,DC=ema,DC=ad,DC=plinternal,DC=com","WL-PL-MM-TAX-Assist-Central Cluster"
+# 1 SiteUrl,ADGroup,SPGroup
+# 2 "https://pl-poc","CN=WL-PL-MM-TAX-Assist-Central Cluster,OU=Tax,OU=DigitalMailroom,OU=Sharepoint,OU=Groups,OU=PL,DC=cee,DC=ema,DC=ad,DC=plinternal,DC=com","WL-PL-MM-TAX-Assist-Central Cluster"
+# 3 "https://pl-poc","CN=WL-PL-MM-XXXXXXXXXXXXXXXXXX Cluster,XXXXXXXXXXXXXX","XXXXXXXXXXXXXX"
 
-try {
-
-# The input CSV file with paramets 
+ The input CSV file with paramets 
 $InputFile = "C:\SharePointSkrypts\Grupy\ADToSPGroups.csv"
 
 $tblData = Import-CSV $InputFile
@@ -173,20 +172,6 @@ foreach ($Row in $tblData)
 
 }
 
-    New-EventLog -LogName Application -Source "SharePoint" -ErrorAction SilentlyContinue
-    Write-EventLog -LogName Application -Source "SharePoint" -EntryType Information -EventId 1 -Message "SYNC SUCCESS Script will now exit"  
-    Write-Host "SYNC SUCCESS Script will now exit" -ForegroundColor magenta
-
-}
-
-Catch 
-
-{
-    
-    New-EventLog -LogName Application -Source "SharePoint" -ErrorAction SilentlyContinue
-    Write-EventLog -LogName Application -Source "SharePoint" -EntryType Information -EventId 1 -Message "SYNC FAILED - Please check parametrs or contact us directly..."  
-    Write-Host "SYNC FAILED - Please check parametrs or contact us directly..." -ForegroundColor Red
-} 
-
+Write-Host "Script will now exit" -ForegroundColor magenta
 
 # End of code
